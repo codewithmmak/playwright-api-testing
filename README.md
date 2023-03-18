@@ -6,7 +6,6 @@ This is a Playwright API testing framework designed to demonstrate playwright ap
 
 ## Features of this framework
 * Playwright API Testing
-* [Cloud Integration: LambdaTest](http://www.lambdatest.com?fp_ref=md-moeen-ajaz40)
 * <a href="http://www.lambdatest.com?fp_ref=md-moeen-ajaz40" target="_blank">Cloud Integration: LambdaTest</a>
 
 ## Getting started
