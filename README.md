@@ -5,8 +5,7 @@
 This is a Playwright API testing framework designed to demonstrate playwright api testing example
 
 ## Features of this framework
-* Playwright Reporting
-* [Reporting: Allure](https://www.npmjs.com/package/allure-playwright)
+* Playwright API Testing
 * [Cloud Integration: LambdaTest](http://www.lambdatest.com?fp_ref=md-moeen-ajaz40)
 
 ## Getting started
