@@ -25,6 +25,9 @@ This is a Playwright API testing framework designed to demonstrate playwright ap
 ## How to Run Test Locally
 * Go to the Project root directory and run command: `npm test`
 
+## How to Run Single Spec Locally
+* Go to the Project root directory and run command: `npx playwright test tests/01_post_static_data.spec.js`
+
 ## How to view default Playwright HTML report
 * Go to the Project root directory: `./playwright-report/index.html`
 
