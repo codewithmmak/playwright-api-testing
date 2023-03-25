@@ -13,14 +13,16 @@ This is a Playwright API testing framework designed to demonstrate playwright ap
 * Download and install Node.js
 * Download and install any Text Editor like Visual Code/Sublime/Brackets
 
-### Setup Visual Code
-* Install GitLens Extension from the Marketplace: `GitLens — Git supercharged by GitKraken https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens`
-* Go to Visual Code Preference > Setting and search `formatOnSave` and enable/ON it.
-
 ### Setup Scripts 
 * Clone the repository into a folder
 * Go to Project root directory and install Dependency: `npm install`
 * All the dependencies from package.json would be installed in node_modules folder.
+
+### Setup Visual Code (Optional)
+* <a href="https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright" target="_blank">Playwright Test for VSCode</a>
+* Install GitLens Extension from the Marketplace: `GitLens — Git supercharged by GitKraken https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens`
+* <a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme" target="_blank">Material Icon Theme</a>
+* Go to Visual Code Preference > Setting and search `formatOnSave` and enable/ON it.
 
 ## How to Run Test Locally
 * Go to the Project root directory and run command: `npm test`
