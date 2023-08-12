@@ -16,10 +16,10 @@
   "author": "Code with MMAK",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
-    "@playwright/test": "^1.31.2",
-    "luxon": "^3.3.0",
-    "npm-check-updates": "^16.7.13",
-    "rimraf": "^4.4.0"
+    "@faker-js/faker": "^8.0.2",
+    "@playwright/test": "^1.37.0",
+    "luxon": "^3.4.0",
+    "npm-check-updates": "^16.11.1",
+    "rimraf": "^5.0.1"
   }
 }
