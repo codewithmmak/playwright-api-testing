@@ -1,7 +1,7 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 const bookingDetails = require('../test-data/booking-details.json');
-
+//testcase 2
 test('should be able to create a booking', async ({ request }) => {
     const response = await request.post(`/booking`, {
         data: bookingDetails
