@@ -20,6 +20,6 @@
     "@playwright/test": "^1.37.0",
     "luxon": "^3.4.0",
     "npm-check-updates": "^16.11.1",
-    "rimraf": "^5.0.1"
+    "rimraf": "^6.0.0"
   }
 }
