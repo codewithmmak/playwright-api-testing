@@ -19,7 +19,7 @@
     "@faker-js/faker": "^10.3.0",
     "@playwright/test": "^1.58.2",
     "luxon": "^3.7.2",
-    "npm-check-updates": "^19.4.1",
+    "npm-check-updates": "^21.0.0",
     "rimraf": "^6.1.3"
   }
 }
