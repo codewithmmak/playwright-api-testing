@@ -4,7 +4,19 @@
   "description": "---\r # Playwright API Testing Setup Guide\r ---",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "playwright test",
+    "test:dev": "cross-env TEST_ENV=dev playwright test",
+    "test:qa": "cross-env TEST_ENV=qa playwright test",
+    "test:staging": "cross-env TEST_ENV=staging playwright test",
+    "test:prod": "cross-env TEST_ENV=prod playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:ci": "playwright test --reporter=line,junit,html",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier . --check",
+    "format:write": "prettier . --write",
+    "hooks:install": "git config core.hooksPath .githooks"
   },
   "keywords": [
     "playwright",
@@ -16,10 +28,15 @@
   "author": "Code with MMAK",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^10.3.0",
-    "@playwright/test": "^1.58.2",
+    "@faker-js/faker": "^10.4.0",
+    "@playwright/test": "^1.60.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
     "luxon": "^3.7.2",
-    "npm-check-updates": "^19.4.1",
+    "npm-check-updates": "^22.2.0",
+    "prettier": "^3.8.3",
     "rimraf": "^6.1.3"
   }
 }

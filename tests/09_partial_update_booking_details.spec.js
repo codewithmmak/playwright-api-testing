@@ -1,46 +1,52 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-
-var token
+const {
+  createAuthToken,
+  createBooking,
+  getBookingById,
+  patchBooking,
+} = require('./support/booking-api');
 
 test('should be able to partial update the booking details', async ({ request }) => {
+  const { response: authResponse, body: authBody } = await createAuthToken(request);
+  expect(authResponse.ok()).toBeTruthy();
+  expect(authResponse.status()).toBe(200);
+  expect(authBody.token).toEqual(expect.any(String));
 
-    // Create a Token which will be used in PATCH request
+  const created = await createBooking(request, {
+    firstname: 'Original',
+    lastname: 'Value',
+    totalprice: 250,
+    depositpaid: true,
+    bookingdates: {
+      checkin: '2026-11-01',
+      checkout: '2026-11-10',
+    },
+    additionalneeds: 'Breakfast',
+  });
 
-    const response = await request.post(`/auth`, {
-        data: {
-            "username": "admin",
-            "password": "password123"
-        }
-    });
-    console.log(await response.json());
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(200);
-    const responseBody = await response.json();
-    token = responseBody.token;
-    console.log("New Token is: " + token);
+  const partialPayload = {
+    firstname: 'Sim',
+    lastname: 'Son',
+    totalprice: 333,
+    depositpaid: false,
+  };
 
-    // PATCH
+  const partialUpdate = await patchBooking(
+    request,
+    created.bookingId,
+    authBody.token,
+    partialPayload
+  );
 
-    const partialUpdateRequest = await request.patch(`/booking/1`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Cookie': `token=${token}`
-        },
-        data: {
-            "firstname": "Sim",
-            "lastname": "Son",
-            "totalprice": 333,
-            "depositpaid": false
-        }
-    });
-    console.log(await partialUpdateRequest.json());
-    expect(partialUpdateRequest.ok()).toBeTruthy();
-    expect(partialUpdateRequest.status()).toBe(200);
-    const partialUpdatedResponseBody = await partialUpdateRequest.json()
-    expect(partialUpdatedResponseBody).toHaveProperty("firstname", "Sim");
-    expect(partialUpdatedResponseBody).toHaveProperty("lastname", "Son");
-    expect(partialUpdatedResponseBody).toHaveProperty("totalprice", 333);
-    expect(partialUpdatedResponseBody).toHaveProperty("depositpaid", false);
+  expect(partialUpdate.response.ok()).toBeTruthy();
+  expect(partialUpdate.response.status()).toBe(200);
+  expect(partialUpdate.body).toMatchObject(partialPayload);
+
+  const latest = await getBookingById(request, created.bookingId);
+  expect(latest.response.ok()).toBeTruthy();
+  expect(latest.response.status()).toBe(200);
+  expect(latest.body).toMatchObject(partialPayload);
+  expect(latest.body.bookingdates).toMatchObject(created.payload.bookingdates);
+  expect(latest.body.additionalneeds).toBe(created.payload.additionalneeds);
 });

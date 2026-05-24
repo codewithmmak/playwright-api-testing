@@ -1,11 +1,22 @@
 // @ts-check
+const fs = require('fs');
+const path = require('path');
 const { defineConfig, devices } = require('@playwright/test');
+const dotenv = require('dotenv');
+
+const testEnv = process.env.TEST_ENV || 'local';
+const envFile = testEnv === 'local' ? '.env' : `.env.${testEnv}`;
+const envPath = path.resolve(process.cwd(), envFile);
+
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+} else {
+  dotenv.config();
+}
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
+ * Read environment variables from .env files.
  */
-// require('dotenv').config();
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -19,7 +30,7 @@ module.exports = defineConfig({
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+    timeout: 5000,
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -30,17 +41,24 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ['html', { open: 'never' }],
+    ['junit', { outputFile: 'test-results/junit-report.xml' }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://restful-booker.herokuapp.com',
+    baseURL: process.env.BASE_URL || 'https://restful-booker.herokuapp.com',
     // baseURL: 'https://petstore.swagger.io/v2',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      Accept: 'application/json',
+    },
   },
 
   /* Configure projects for major browsers */
@@ -90,4 +108,3 @@ module.exports = defineConfig({
   //   port: 3000,
   // },
 });
-
