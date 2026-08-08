@@ -35,7 +35,7 @@
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "luxon": "^3.7.2",
-    "npm-check-updates": "^22.2.0",
+    "npm-check-updates": "^23.0.0",
     "prettier": "^3.8.3",
     "rimraf": "^6.1.3"
   }
